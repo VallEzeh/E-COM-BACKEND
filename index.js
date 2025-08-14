@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
 
-// app.use(e.static("./box"));
+app.use(e.static("./box"));
 
 // app.use(
 //   cors({
