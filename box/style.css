@@ -1,0 +1,18 @@
+.ff{
+    margin: auto;
+    width: 300px;
+    background-color: coral;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 10px;
+}
+.ff div{
+    display: flex;
+    flex-direction: column;
+    padding-inline: 40px;
+    gap: 10px;
+}
+h1{
+    text-align: center;
+}
