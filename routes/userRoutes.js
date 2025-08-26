@@ -12,9 +12,9 @@ const router = e.Router();
 
 router.post("/", forSignup);
 
-router.get("/get", getAllUsers);
+router.get("/get", authorize(["Admin"]), getAllUsers);
 
-router.get("/:id", get1user);
+router.get("/:id", authorize(["Admin"]), get1user);
 
 router.delete("/:id", authorize(["Admin"]), del1User);
 
