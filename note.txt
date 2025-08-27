@@ -4,3 +4,7 @@
   "email": "john@.com",
   "password": "mypassword123"
 }
+{
+  "email": "kelvin@.com",
+  "password": "opener"
+}
