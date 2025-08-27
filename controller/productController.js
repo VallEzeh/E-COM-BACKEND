@@ -6,7 +6,7 @@ import Product from "../models/product.js";
 const createProduct = async (req, res) => {
   try {
     // ✅ Only admins can create
-    if (!req.user || req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "Admin") {
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
