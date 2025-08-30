@@ -5,6 +5,50 @@
   "password": "mypassword123"
 }
 {
-  "email": "kelvin@.com",
+  "email": "kelvin@gmail.com",
   "password": "opener"
 }
+import express from "express";
+import Product from "../models/Product.js";
+import Category from "../models/Category.js";
+
+const router = express.Router();
+
+// 👉 Create product linked to category
+router.post("/", async (req, res) => {
+  try {
+    const { name, price, stock, brand, image, categoryId } = req.body;
+
+    // check if category exists
+    const category = await Category.findById(categoryId);
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    const product = new Product({
+      name,
+      price,
+      stock,
+      brand,
+      image,
+      category: category._id,  // link product to category
+    });
+
+    await product.save();
+    res.status(201).json(product);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// 👉 Get products with category info populated
+router.get("/", async (req, res) => {
+  try {
+    const products = await Product.find().populate("category", "name description");
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+export default router;

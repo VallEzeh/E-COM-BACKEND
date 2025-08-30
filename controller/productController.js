@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import Category from "../models/category.js";
 
 // @desc    Create a new product
 // @route   POST /api/products
@@ -10,9 +11,14 @@ const createProduct = async (req, res) => {
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
-    const { name, price, stock, category, brand } = req.body;
+    const { name, price, stock, categoryId, brand } = req.body;
 
-    if (!name || !price || !stock || !category) {
+       const category = await Category.findById(categoryId);
+       if (!category) {
+         return res.status(404).json({ message: "Category not found" });
+       }
+
+    if (!name || !price || !stock || !categoryId) {
       return res
         .status(400)
         .json({ message: "All required fields must be filled" });
@@ -27,7 +33,7 @@ const createProduct = async (req, res) => {
       name,
       price,
       stock,
-      category,
+      category:category._id,
       brand,
       image,
       author: req.user._id, // from auth middleware
@@ -45,10 +51,8 @@ const createProduct = async (req, res) => {
 // @access  Public
 const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate(
-      "author",
-      "firstname lastname"
-    );
+    const products = await Product.find().populate("category", "name");
+    res.json(product)
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: "Error fetching products" });
