@@ -11,14 +11,16 @@ const createProduct = async (req, res) => {
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
-    const { name, price, stock, categoryId, brand } = req.body;
+    const { name, price, stock, category, brand } = req.body;
 
-       const category = await Category.findById(categoryId);
-       if (!category) {
-         return res.status(404).json({ message: "Category not found" });
-       }
+    const categoryDoc = await Category.findOne({ name: category });
+    if (!categoryDoc) {
+      return res
+        .status(404)
+        .json({ message: `Category '${category}' not found` });
+    }
 
-    if (!name || !price || !stock || !categoryId) {
+    if (!name || !price || !stock || !category) {
       return res
         .status(400)
         .json({ message: "All required fields must be filled" });
@@ -33,7 +35,7 @@ const createProduct = async (req, res) => {
       name,
       price,
       stock,
-      category:category._id,
+      category:categoryDoc._id,
       brand,
       image,
       author: req.user._id, // from auth middleware
