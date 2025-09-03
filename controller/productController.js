@@ -54,9 +54,9 @@ const createProduct = async (req, res) => {
 const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find().populate("category", "name");
-    res.json(product)
-    res.status(200).json(products);
+    res.status(200).json(products); // ✅ send all products once
   } catch (error) {
+    console.error(error); // log the real error for debugging
     res.status(500).json({ message: "Error fetching products" });
   }
 };

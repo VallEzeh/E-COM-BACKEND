@@ -74,7 +74,7 @@ const forLogin = async (req, res) => {
       maxAge: 3 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({ message: "Login successful", checkUser });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });

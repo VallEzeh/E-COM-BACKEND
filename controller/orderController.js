@@ -68,6 +68,6 @@ export const updateOrderStatus = async (req, res) => {
 
     res.json(updatedOrder);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
   }
 };
