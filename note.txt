@@ -52,3 +52,7 @@ router.get("/", async (req, res) => {
 });
 
 export default router;
+
+
+git rm --cached .env
+git commit -m "Remove .env file from repository"
