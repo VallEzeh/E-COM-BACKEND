@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import category from "./routes/categoryRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { config } from "dotenv";
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRoutes);
 app.use("/api", productRoutes);
 app.use("/api/categories", category);
+app.use("/api/orders", orderRoutes);
 
 app.listen(port, () => {
   console.log(`server is running on port: ${port}`);

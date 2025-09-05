@@ -4,7 +4,7 @@ import {
   getMyOrders,
   getAllOrders,
   updateOrderStatus,
-} from "../controllers/orderController.js";
+} from "../controller/ordercontroller.js";
 import authorize from "../middlewares/authorize.js";
 
 
