@@ -21,7 +21,7 @@ const productSchema = new Schema(
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
-       ref: "Category",
+      ref: "Category",
       required: [true, "Category is required"],
     },
     brand: {
@@ -31,6 +31,12 @@ const productSchema = new Schema(
     image: {
       url: String,
       filename: String,
+    },
+    description: {
+      type: String,
+      required: false, // make true if you want every product to have a description
+      trim: true,
+      maxlength: 2000, // optional: set a character limit
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,

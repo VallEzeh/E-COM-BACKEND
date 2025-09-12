@@ -1,3 +1,4 @@
+// models/order.js
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
@@ -18,21 +19,26 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     shippingAddress: {
+      name: { type: String, required: true },
+      phone1: { type: String, required: true },
+      phone2: { type: String },
       address: { type: String, required: true },
       city: { type: String, required: true },
+      state: { type: String, required: true },
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
-    paymentMethod: {
-      type: String,
-      enum: ["card", "paypal", "paystack", "flutterwave", "cash"],
-      default: "cash",
-    },
+    paymentMethod: { type: String, required: true },
     totalPrice: { type: Number, required: true },
     status: {
       type: String,
-      enum: ["pending", "paid", "shipped", "delivered", "canceled"],
+      enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
       default: "pending",
+    },
+    paymentStatus: {
+      type: String,
+      enum: ["pending" ,"unpaid", "paid", "refunded"],
+      default: "unpaid",
     },
   },
   { timestamps: true }
@@ -40,3 +46,5 @@ const orderSchema = new mongoose.Schema(
 
 const Order = mongoose.model("Order", orderSchema);
 export default Order;
+
+

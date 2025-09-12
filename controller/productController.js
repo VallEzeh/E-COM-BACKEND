@@ -11,7 +11,7 @@ const createProduct = async (req, res) => {
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
-    const { name, price, stock, category, brand } = req.body;
+    const { name, price, stock, category, brand, description } = req.body;
 
     const categoryDoc = await Category.findOne({ name: category });
     if (!categoryDoc) {
@@ -35,8 +35,9 @@ const createProduct = async (req, res) => {
       name,
       price,
       stock,
-      category:categoryDoc._id,
+      category: categoryDoc._id,
       brand,
+      description, // ✅ added description
       image,
       author: req.user._id, // from auth middleware
     });
@@ -83,7 +84,7 @@ const getProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     // ✅ Only admins can update
-    if (!req.user || req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "Admin") {
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
@@ -118,7 +119,7 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     // ✅ Only admins can delete
-    if (!req.user || req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "Admin") {
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 

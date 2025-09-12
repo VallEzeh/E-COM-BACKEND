@@ -33,7 +33,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://con-react-vallezehs-projects.vercel.app",
+      // "https://con-react-vallezehs-projects.vercel.app",
     ],
     credentials: true,
   })
@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRoutes);
 app.use("/api", productRoutes);
 app.use("/api/categories", category);
-app.use("/api/orders", orderRoutes);
+app.use("/order", orderRoutes);
 
 app.listen(port, () => {
   console.log(`server is running on port: ${port}`);

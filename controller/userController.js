@@ -55,6 +55,7 @@ const forLogin = async (req, res) => {
   try {
     let { email, password } = req.body;
     const checkUser = await User.findOne({ email });
+    console.log(checkUser)
     if (!checkUser) return res.status(404).json({ message: "User not found" });
 
     let passwordMatch = await bcrypt.compare(password, checkUser.password);
