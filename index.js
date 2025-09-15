@@ -32,8 +32,8 @@ app.use(e.static(path.join(__dirname, "box")));
 app.use(
   cors({
     origin: [
+      "https://ecommerce-1-rho.vercel.app",
       "http://localhost:5173",
-      // "https://con-react-vallezehs-projects.vercel.app",
     ],
     credentials: true,
   })
